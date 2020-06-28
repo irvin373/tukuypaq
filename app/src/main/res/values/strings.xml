@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">tukuypacAndroid</string>
+    <string name="title_home">Plants</string>
+    <string name="title_dashboard">Recipe</string>
+    <string name="title_notifications">Recipe</string>
+</resources>

@@ -7,6 +7,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.room.Room
+//import com.example.tukuypacandroid.data.AppDatabase
+import com.example.tukuypacandroid.data.RoomSingleton
+import com.example.tukuypacandroid.data.model.MedicalGroup
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,7 +25,15 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.navigation_home, R.id.navigation_dashboard))
+//        val db = Room.databaseBuilder(
+//            applicationContext,
+//            AppDatabase::class.java, "plantsDB"
+//        ).build()
+        val db = RoomSingleton.getInstance(applicationContext);
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+//        val list = db.medicalGroupDao().getAll();
+//        println(list)
+//        db.medicalGroupDao().insertAll(MedicalGroup(1, "digestion"))
     }
 }

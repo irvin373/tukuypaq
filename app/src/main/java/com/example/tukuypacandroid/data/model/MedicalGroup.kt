@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "MedicalGroup")
 data class MedicalGroup(
-    @PrimaryKey val id: Int,
-    @ColumnInfo(name = "name") val firstName: String?
+    @PrimaryKey(autoGenerate = true) val id: Int,
+    @ColumnInfo(name = "name") val name: String?
 )

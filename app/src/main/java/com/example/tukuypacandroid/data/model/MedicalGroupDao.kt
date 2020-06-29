@@ -18,7 +18,7 @@ interface MedicalGroupDao {
 //    fun findByName(first: String, last: String): MedicalGroup
 
     @Insert
-    fun insertAll(vararg medicalGroup: MedicalGroup)
+    fun insert(medicalGroup: MedicalGroup)
 
     @Delete
     fun delete(MedicalGroup: MedicalGroup)

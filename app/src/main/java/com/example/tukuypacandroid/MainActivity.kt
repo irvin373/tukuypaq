@@ -11,6 +11,8 @@ import androidx.room.Room
 //import com.example.tukuypacandroid.data.AppDatabase
 import com.example.tukuypacandroid.data.RoomSingleton
 import com.example.tukuypacandroid.data.model.MedicalGroup
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
@@ -21,19 +23,22 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.navigation_home, R.id.navigation_dashboard))
-//        val db = Room.databaseBuilder(
-//            applicationContext,
-//            AppDatabase::class.java, "plantsDB"
-//        ).build()
         val db = RoomSingleton.getInstance(applicationContext);
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        GlobalScope.launch {
+//            db.medicalGroupDao().insert(MedicalGroup(2, "digestion"))
+            val data = db.medicalGroupDao().getAll()
+
+            data?.forEach {
+                println("===============")
+                println(it.name)
+            }
+        }
 //        val list = db.medicalGroupDao().getAll();
 //        println(list)
-//        db.medicalGroupDao().insertAll(MedicalGroup(1, "digestion"))
+//        db.medicalGroupDao().insert(MedicalGroup(2, "digestion"))
     }
 }

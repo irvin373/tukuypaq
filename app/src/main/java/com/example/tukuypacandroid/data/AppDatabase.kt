@@ -12,7 +12,7 @@ import com.example.tukuypacandroid.data.model.MedicalGroupDao
 //    abstract fun medicalGroupDao(): MedicalGroupDao
 //}
 
-@Database(entities = arrayOf(MedicalGroup::class), version = 1, exportSchema = false)
+@Database(entities = [MedicalGroup::class], version = 1, exportSchema = false)
 abstract class RoomSingleton : RoomDatabase(){
     abstract fun medicalGroupDao():MedicalGroupDao
 
@@ -23,7 +23,7 @@ abstract class RoomSingleton : RoomDatabase(){
                 INSTANCE = Room.databaseBuilder(
                     context,
                     RoomSingleton::class.java,
-                    "plantsDB")
+                    "tuquypac.db")
                     .build()
             }
             return INSTANCE as RoomSingleton

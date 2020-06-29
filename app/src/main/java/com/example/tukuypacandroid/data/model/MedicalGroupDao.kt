@@ -1,18 +1,24 @@
 package com.example.tukuypacandroid.data.model
 
-import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
 
 @Dao
 interface MedicalGroupDao {
-    @Query("SELECT * from MedicalGroup")
-    fun getAll():  LiveData<List<MedicalGroup>>
+    @Query("SELECT * FROM medicalGroup")
+    fun getAll(): List<MedicalGroup>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(medical: MedicalGroup)
+    @Query("SELECT * FROM medicalGroup WHERE id IN (:id)")
+    fun loadAllByIds(id: Int): MedicalGroup
 
-    @Query("DELETE FROM MedicalGroup")
-    suspend fun deleteAll()
+//    @Query("SELECT * FROM user WHERE first_name LIKE :first AND " +
+//            "last_name LIKE :last LIMIT 1")
+//    fun findByName(first: String, last: String): MedicalGroup
+
+    @Insert
+    fun insertAll(vararg medicalGroup: MedicalGroup)
 
     @Delete
     fun delete(MedicalGroup: MedicalGroup)

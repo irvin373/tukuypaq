@@ -7,6 +7,10 @@ interface PlantDao {
     @Query("SELECT * FROM plant")
     fun getAll(): List<Plant>
 
+    @Transaction
+    @Query("SELECT * FROM plant")
+    fun getPlantsWithGroup(): List<PlantWithGroup>
+
     @Query("DELETE FROM plant")
     fun deleteAll()
 

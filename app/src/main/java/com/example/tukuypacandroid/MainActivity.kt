@@ -34,15 +34,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun populateDB(db: RoomSingleton) {
         GlobalScope.launch {
-            db.medicalGroupDao().deleteAll()
-            db.plantDao().deleteAll()
-            val seed = Seed()
-            db.medicalGroupDao().insert(seed.getAllGroups())
-            db.plantDao().insert(seed.getAllPant())
+//            db.medicalGroupDao().deleteAll()
+//            db.plantDao().deleteAll()
+//            val seed = Seed()
+//            db.medicalGroupDao().insert(seed.getAllGroups())
+//            db.plantDao().insert(seed.getAllPant())
             println("=================")
-            val plants = db.plantDao().getAll()
+            val plants = db.plantDao().getPlantsWithGroup()
             plants.forEach {
-                println("${it.id} ${it.name} ${it.groupId}")
+                println("${it.group.name} ${it.plant.name}")
             }
         }
     }

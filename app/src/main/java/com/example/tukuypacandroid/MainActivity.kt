@@ -7,14 +7,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.room.Room
 //import com.example.tukuypacandroid.data.AppDatabase
 import com.example.tukuypacandroid.data.RoomSingleton
-import com.example.tukuypacandroid.data.Seed
-import com.example.tukuypacandroid.data.model.MedicalGroup
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,10 +22,10 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.navigation_home, R.id.navigation_dashboard))
-        val db = RoomSingleton.getInstance(applicationContext);
+//        val db = RoomSingleton.getInstance(applicationContext);
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-        populateDB(db)
+//        populateDB(db)
     }
 
     private fun populateDB(db: RoomSingleton) {

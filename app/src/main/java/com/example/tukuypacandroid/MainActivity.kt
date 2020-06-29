@@ -10,6 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.room.Room
 //import com.example.tukuypacandroid.data.AppDatabase
 import com.example.tukuypacandroid.data.RoomSingleton
+import com.example.tukuypacandroid.data.Seed
 import com.example.tukuypacandroid.data.model.MedicalGroup
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -28,17 +29,21 @@ class MainActivity : AppCompatActivity() {
         val db = RoomSingleton.getInstance(applicationContext);
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-        GlobalScope.launch {
-//            db.medicalGroupDao().insert(MedicalGroup(2, "digestion"))
-            val data = db.medicalGroupDao().getAll()
+        populateDB(db)
+    }
 
-            data?.forEach {
-                println("===============")
-                println(it.name)
+    private fun populateDB(db: RoomSingleton) {
+        GlobalScope.launch {
+            db.medicalGroupDao().deleteAll()
+            db.plantDao().deleteAll()
+            val seed = Seed()
+            db.medicalGroupDao().insert(seed.getAllGroups())
+            db.plantDao().insert(seed.getAllPant())
+            println("=================")
+            val plants = db.plantDao().getAll()
+            plants.forEach {
+                println("${it.id} ${it.name} ${it.groupId}")
             }
         }
-//        val list = db.medicalGroupDao().getAll();
-//        println(list)
-//        db.medicalGroupDao().insert(MedicalGroup(2, "digestion"))
     }
 }

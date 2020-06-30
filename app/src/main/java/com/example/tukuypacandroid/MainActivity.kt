@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.navigation_home, R.id.navigation_dashboard))
-//        val db = RoomSingleton.getInstance(applicationContext);
+        val db = RoomSingleton.getInstance(applicationContext);
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 //        populateDB(db)

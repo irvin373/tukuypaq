@@ -11,6 +11,10 @@ interface PlantDao {
     @Query("SELECT * FROM plant")
     fun getPlantsWithGroup(): List<PlantWithGroup>
 
+    @Transaction
+    @Query("SELECT * FROM plant Where id in (:id) LIMIT 1")
+    fun getSinglePlants(id: Int): PlantWithGroup
+
     @Query("DELETE FROM plant")
     fun deleteAll()
 

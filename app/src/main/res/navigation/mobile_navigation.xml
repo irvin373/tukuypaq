@@ -9,7 +9,16 @@
         android:id="@+id/navigation_home"
         android:name="com.example.tukuypacandroid.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <argument
+            android:name="plantIdNumber"
+            app:argType="integer"
+            android:defaultValue="1"/>
+        <action
+            android:id="@+id/action_plantList_to_plantDetail"
+            app:destination="@id/plantDetail"
+            app:popUpTo="@id/navigation_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -20,7 +29,12 @@
         android:id="@+id/plantDetail"
         android:name="com.example.tukuypacandroid.PlantDetail"
         android:label="plant_detail_fragment"
-        tools:layout="@layout/plant_detail_fragment" />
+        tools:layout="@layout/plant_detail_fragment" >
+        <argument
+            android:name="plantIdNumber"
+            app:argType="integer"
+            android:defaultValue="1"/>
+    </fragment>
 
     <!--    <fragment-->
 <!--        android:id="@+id/navigation_notifications"-->

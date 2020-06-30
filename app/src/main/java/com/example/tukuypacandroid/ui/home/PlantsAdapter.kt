@@ -1,11 +1,13 @@
 package com.example.tukuypacandroid.ui.home
 
+import android.app.DirectAction
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tukuypacandroid.R
@@ -18,14 +20,12 @@ class PlantsAdapter(private val items : List<PlantWithGroup>)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.title.text = items[position].plant.name
         holder.itemView.group.text = items[position].group.name
-//        holder.itemView.description.text = items[position].description
 
         val assetsBitmap: Bitmap? = getBitmapFromAssets(items[position].plant.imgDir as String, holder.itemView.context)
         holder.itemView.plant_item_image.setImageBitmap(assetsBitmap)
         holder.itemView.card_view.setOnClickListener{view ->
-//            val action = plantListDirections.actionPlantListToPlantDetail(position)
-//            view.findNavController().navigate(action)
-//            view.findNavController().navigate(action)
+            val action = HomeFragmentDirections.actionPlantListToPlantDetail(position)
+            view.findNavController().navigate(action)
         }
     }
 

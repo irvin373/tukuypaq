@@ -9,8 +9,8 @@ class PlantDetailViewModel : ViewModel() {
     private val _plant = MutableLiveData<PlantWithGroup>().apply {
         value = null
     }
+
     fun setPlant(plant: PlantWithGroup?) {
-        _plant.value = plant
         _plant.postValue(plant)
     }
     val plant: LiveData<PlantWithGroup> = _plant

@@ -12,7 +12,6 @@ import com.example.tukuypacandroid.data.RoomSingleton
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 
 
 class HomeFragment : Fragment() {
@@ -25,13 +24,28 @@ class HomeFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
+        this.getPlants(container?.context as Context)
+        return root
+    }
+
+    private fun getPlants(container: Context) {
         GlobalScope.async {
-            val db = RoomSingleton.getInstance(container?.context as Context);
+            // do work here ...
+            val db = RoomSingleton.getInstance(container);
             val plants = db.plantDao().getPlantsWithGroup()
             adapter = PlantsAdapter(plants)
             plantlistView.adapter = adapter
         }
-        return root
     }
 
+}
+
+class doAsync(val handler: () -> Unit) : AsyncTask<Void, Void, Void>() {
+    init {
+        execute()
+    }
+    override fun doInBackground(vararg params: Void?): Void? {
+        handler()
+        return null
+    }
 }

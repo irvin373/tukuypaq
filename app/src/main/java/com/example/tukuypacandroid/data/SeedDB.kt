@@ -2,6 +2,7 @@ package com.example.tukuypacandroid.data
 
 import com.example.tukuypacandroid.data.model.MedicalGroup
 import com.example.tukuypacandroid.data.model.Plant
+import com.example.tukuypacandroid.data.model.Recipe
 
 class Seed {
     fun getAllGroups(): List<MedicalGroup> {
@@ -52,6 +53,25 @@ class Seed {
                 "wirawira.jpg"
             )
 //            Plant(3, "", 1, "", ""),
+        )
+    }
+
+    fun getAllRecipes(): List<Recipe> {
+        return listOf(
+            Recipe(
+                1,
+                "Mate manzanilla",
+                "mate.jpg",
+                "La Muña Andina es un planta que crece en los valles interandinos del Perú, su uso se remonta a épocas pre – hispánicas, convirtiéndose en un remedio natural de invaluable valor cultural.\n" +
+                        "\n" +
+                        "El consumo tradicional de la muña para remediar estas afecciones se da a través de la infusión o mate,  ya que de esta forma se logra extraer sus propiedades carminativas y estomacales con una mayor eficacia.  No obstante su suave sabor a menta ha sido dedicado también a la condimentación y aromatización de los platos culinarios de la serranía suramericana desde hace siglos."
+            ),
+            Recipe(
+                2,
+                "super mate +",
+                "mate.jpg",
+                "El menta, limoncillo, la melisa u hoja de limón\u200B (Melissa officinalis) es una hierba perenne de la familia de las lamiáceas, nativa del sur de Europa y de la región mediterránea. Apreciada por su fuerte aroma a limón, se utiliza en infusión como tranquilizante natural, y su aceite esencial se aprovecha en perfumería.\n"
+            )
         )
     }
 }

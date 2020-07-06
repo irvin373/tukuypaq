@@ -9,7 +9,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 //import com.example.tukuypacandroid.data.AppDatabase
 import com.example.tukuypacandroid.data.RoomSingleton
+import com.example.tukuypacandroid.data.Seed
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -23,22 +25,22 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.navigation_home, R.id.navigation_dashboard))
         val db = RoomSingleton.getInstance(applicationContext);
+        populateDB(db)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-//        populateDB(db)
     }
 
     private fun populateDB(db: RoomSingleton) {
-        GlobalScope.launch {
-//            db.medicalGroupDao().deleteAll()
-//            db.plantDao().deleteAll()
-//            val seed = Seed()
-//            db.medicalGroupDao().insert(seed.getAllGroups())
-//            db.plantDao().insert(seed.getAllPant())
-            println("=================")
-            val plants = db.plantDao().getPlantsWithGroup()
-            plants.forEach {
-                println("${it.group.name} ${it.plant.name}")
+        GlobalScope.async {
+            val medicalGroups = db.medicalGroupDao().getAll()
+            println("==== ${medicalGroups.size} =====")
+            if (medicalGroups.isEmpty()) {
+//                db.medicalGroupDao().deleteAll()
+//                db.plantDao().deleteAll()
+                val seed = Seed()
+                db.medicalGroupDao().insert(seed.getAllGroups())
+                db.plantDao().insert(seed.getAllPant())
+                db.recipeDao().insert(seed.getAllRecipes())
             }
         }
     }

@@ -4,20 +4,18 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.tukuypacandroid.data.model.MedicalGroup
-import com.example.tukuypacandroid.data.model.MedicalGroupDao
-import com.example.tukuypacandroid.data.model.Plant
-import com.example.tukuypacandroid.data.model.PlantDao
+import com.example.tukuypacandroid.data.model.*
 
 //@Database(entities = arrayOf(MedicalGroup::class), version = 1)
 //abstract class AppDatabase : RoomDatabase() {
 //    abstract fun medicalGroupDao(): MedicalGroupDao
 //}
 
-@Database(entities = [MedicalGroup::class, Plant::class], version = 1, exportSchema = false)
+@Database(entities = [MedicalGroup::class, Plant::class, Recipe::class], version = 1, exportSchema = false)
 abstract class RoomSingleton : RoomDatabase(){
-    abstract fun medicalGroupDao():MedicalGroupDao
-    abstract fun plantDao():PlantDao
+    abstract fun medicalGroupDao(): MedicalGroupDao
+    abstract fun plantDao(): PlantDao
+    abstract fun recipeDao(): RecipeDao
 
     companion object{
         private var INSTANCE: RoomSingleton? = null
@@ -26,7 +24,7 @@ abstract class RoomSingleton : RoomDatabase(){
                 INSTANCE = Room.databaseBuilder(
                     context,
                     RoomSingleton::class.java,
-                    "pl.db")
+                    "pla.db")
                     .build()
             }
             return INSTANCE as RoomSingleton
